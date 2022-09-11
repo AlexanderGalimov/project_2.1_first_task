@@ -2,6 +2,10 @@ package ru.vsu.cs.galimov.tasks;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Random;
 
 public class DrawPanel extends JPanel {
     private static final Color GROUND_COLOR1 = new Color(118, 169, 86);
@@ -19,6 +23,8 @@ public class DrawPanel extends JPanel {
     private static final Color STONE_COLOR = new Color(87, 96, 81);
     private static final Color SUN_COLOR1 = new Color(255, 193, 32);
     private static final Color SUN_COLOR2 = new Color(239, 115, 27);
+    private static Random rnd = new Random();
+    private static Timer timer;
 
     private Mountain mountain;
     private Tree tree;
@@ -30,11 +36,9 @@ public class DrawPanel extends JPanel {
     private Sun sun;
 
     public DrawPanel() {
-        /*s = new Sun(90 + rnd.nextInt(100), 60, 30, 25, 20, Color.YELLOW);
-        timer = new Timer(100, new AbstractAction() {
+        timer = new Timer(1000, new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                s.setX(s.getX() + 1);
                 repaint();
             }
         });
@@ -49,9 +53,8 @@ public class DrawPanel extends JPanel {
                     timer.start();
                 }
             }
-        });*/
+        });
     }
-
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -71,12 +74,71 @@ public class DrawPanel extends JPanel {
         g2d.setColor(GROUND_COLOR2);
         g2d.fillRect(0,height / 2 + height / 16 + height / 4, width, height / 4);
 
-        //todo sun sample
         PositionParameters parameters = new PositionParameters(width / 2 - width / 10, height / 6, width * 2 / 10, (int)(height * 3.5 / 10));
         sun = new Sun(parameters, SUN_COLOR1, SUN_COLOR2);
         sun.draw(g2d);
 
-        // todo mountains samples
+        for (int i = 0; i < 8; i++) {
+            int l = rnd.nextInt(getWidth() / 4) + width / 15;
+            int h = rnd.nextInt(getHeight() / 4) + height / 15;
+            PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),height / 2 + height / 16,l, h);
+            mountain = new Mountain(p, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3);
+            mountain.draw(g2d);
+        }
+
+        for (int i = 0; i < 5; i++) {
+            int l = rnd.nextInt(getWidth() / 4) + width / 10;
+            int h = rnd.nextInt(getHeight() / 4) + height / 8;
+            int flag = rnd.nextInt(2);
+            PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),height / 2 + height / 16,l, h);
+            tree = new Tree(p, TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, TREE_LEAVES_COLOR2);
+            if(flag == 1){
+                tree.drawType1(g2d);
+            }
+            else{
+                tree.drawType2(g2d);
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int l = rnd.nextInt(getWidth() / 15) + width / 30;
+            int h = rnd.nextInt(getHeight() / 15) + height / 27;
+            PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),  height / 8 - rnd.nextInt(height / 40),width / 15, height / 14);
+            cloud = new Cloud(p,CLOUD_COLOR);
+            cloud.draw(g2d);
+        }
+
+        for (int i = 0; i < 3; i++) {
+            int l = rnd.nextInt(getWidth() / 18) + width / 35;
+            PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),  height / 10 - rnd.nextInt(height / 40),width / 18, height / 18);
+            bird = new Bird(p,BIRD_COLOR);
+            bird.draw(g2d);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            int l = rnd.nextInt(getWidth() / 25) + width / 35;
+            PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2), height / 2 + height / 4 - rnd.nextInt(height / 8) ,width / 25, height / 20);
+            grass = new Grass(p,GRASS_COLOR);
+            grass.draw(g2d);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int l = rnd.nextInt(getWidth() / 19) + width / 35;
+            int h = rnd.nextInt(getHeight() / 20) + height / 30;
+            PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2), height / 2 + height / 4 - rnd.nextInt(height / 8) , l, h);
+            stone = new Stone(p, STONE_COLOR);
+            stone.draw(g2d);
+        }
+
+        for (int i = 0; i < 20; i++) {
+            int l = rnd.nextInt(getWidth() / 30) + width / 60;
+            PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),  height - height / 10 - rnd.nextInt(height / 15) , width / 30, height / 27);
+            groundStone = new GroundStone(p, BIRD_COLOR, MOUNTAIN_COLOR1);
+            groundStone.draw(g2d);
+        }
+
+
+        /*// todo mountains samples
         PositionParameters p1 = new PositionParameters(0,height / 2 + height / 16,getWidth() / 5, getHeight() / 5);
         mountain = new Mountain(p1, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3);
         mountain.draw(g2d);
@@ -121,13 +183,8 @@ public class DrawPanel extends JPanel {
         //todo ground_stone
         PositionParameters p10 = new PositionParameters(500, height - height / 8,width / 30, height / 27);
         groundStone = new GroundStone(p10, BIRD_COLOR, MOUNTAIN_COLOR1);
-        groundStone.draw(g2d);
+        groundStone.draw(g2d);*/
 
-
-/*
-        g2d.drawPolygon(new int[] {0, getWidth() / 3, getWidth() * 2 / 3, getWidth()}, new int[] {0, getHeight() / 4, getHeight() / 4, 0}, 4);
-*/
     }
-
 
 }
