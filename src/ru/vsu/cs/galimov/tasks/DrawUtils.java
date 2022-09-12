@@ -22,6 +22,13 @@ public class DrawUtils {
                         parameters.getY() - parameters.getHeight() * 6 / 9 - parameters.getHeight() / 10,
                         parameters.getY() - parameters.getHeight() * 6 / 9 - parameters.getHeight() / 13}, 5);
 
+        g2d.setColor(Color.BLACK);
+        g2d.setStroke(new BasicStroke(1));
+        g2d.drawLine(parameters.getX(),parameters.getY(),(int) (parameters.getX() + parameters.getLength() / 2 - parameters.getLength() / 6),parameters.getY() - parameters.getHeight() * 6 / 9);
+        g2d.drawLine(parameters.getX(), parameters.getY(), parameters.getX() + parameters.getLength(), parameters.getY());
+        g2d.drawLine(parameters.getX() + parameters.getLength(), parameters.getY(), (int) (parameters.getX() + parameters.getLength() / 2 + parameters.getLength() / 6), parameters.getY() - parameters.getHeight() * 6 / 9);
+        g2d.setStroke(new BasicStroke(3));
+
     }
 
     public static void drawTreeType1(Graphics2D g2d,PositionParameters parameters, Color col1, Color col2, Color col3){
@@ -44,6 +51,13 @@ public class DrawUtils {
                 new int[] {parameters.getY() - parameters.getHeight() / 4,
                         parameters.getY() - parameters.getHeight() - parameters.getHeight() / 4,
                         parameters.getY() - parameters.getHeight() / 4}, 3);
+
+        g2d.setColor(Color.black);
+        g2d.setStroke(new BasicStroke(1));
+        g2d.drawLine(parameters.getX(), parameters.getY() - parameters.getHeight() / 4, parameters.getX() + parameters.getLength() / 2, parameters.getY() - parameters.getHeight() - parameters.getHeight() / 4);
+        g2d.drawLine(parameters.getX(), parameters.getY() - parameters.getHeight() / 4, parameters.getX() + parameters.getLength(), parameters.getY() - parameters.getHeight() / 4);
+        g2d.drawLine(parameters.getX() + parameters.getLength() / 2, parameters.getY() - parameters.getHeight() - parameters.getHeight() / 4, parameters.getX() + parameters.getLength(), parameters.getY() - parameters.getHeight() / 4);
+        g2d.setStroke(new BasicStroke(3));
 
     }
 

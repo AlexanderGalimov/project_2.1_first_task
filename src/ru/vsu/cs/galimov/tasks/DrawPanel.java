@@ -60,6 +60,8 @@ public class DrawPanel extends JPanel {
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
+        g2d.setRenderingHint ( RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON );
+
         int width = getWidth();
         int height = getHeight();
 
@@ -102,7 +104,6 @@ public class DrawPanel extends JPanel {
 
         for (int i = 0; i < 4; i++) {
             int l = rnd.nextInt(getWidth() / 15) + width / 30;
-            int h = rnd.nextInt(getHeight() / 15) + height / 27;
             PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),  height / 8 - rnd.nextInt(height / 40),width / 15, height / 14);
             cloud = new Cloud(p,CLOUD_COLOR);
             cloud.draw(g2d);
@@ -136,6 +137,11 @@ public class DrawPanel extends JPanel {
             groundStone = new GroundStone(p, BIRD_COLOR, MOUNTAIN_COLOR1);
             groundStone.draw(g2d);
         }
+
+        // Drawable
+        // сделать мир тип вокруг, плюс компас, который будет показывать градусы при повороте
+        //
+
 
 
         /*// todo mountains samples
