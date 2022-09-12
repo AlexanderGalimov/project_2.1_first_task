@@ -29,6 +29,7 @@ public class DrawUtils {
         g2d.drawLine(parameters.getX() + parameters.getLength(), parameters.getY(), (int) (parameters.getX() + parameters.getLength() / 2 + parameters.getLength() / 6), parameters.getY() - parameters.getHeight() * 6 / 9);
         g2d.setStroke(new BasicStroke(3));
 
+
     }
 
     public static void drawTreeType1(Graphics2D g2d,PositionParameters parameters, Color col1, Color col2, Color col3){
