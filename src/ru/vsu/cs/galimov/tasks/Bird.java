@@ -2,7 +2,7 @@ package ru.vsu.cs.galimov.tasks;
 
 import java.awt.*;
 
-public class Bird {
+public class Bird implements Drawable{
     private PositionParameters parameters;
     private Color color;
 

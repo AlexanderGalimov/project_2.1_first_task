@@ -16,24 +16,28 @@ public class DrawPanel extends JPanel {
     private static final Color MOUNTAIN_COLOR3 = new Color(239, 236, 236);
     private static final Color TREE_LEAVES_COLOR1 = new Color(92, 147, 64);
     private static final Color TREE_LEAVES_COLOR2 = new Color(45, 68, 31);
-    private static final Color TREE_STABLE_COLOR = new Color(70, 59, 41);
+    private static final Color TREE_STABLE_COLOR = new Color(58, 46, 3);
     private static final Color CLOUD_COLOR = new Color(227, 220, 220);
     private static final Color BIRD_COLOR = Color.BLACK;
     private static final Color GRASS_COLOR = new Color(63, 114, 48);
     private static final Color STONE_COLOR = new Color(87, 96, 81);
     private static final Color SUN_COLOR1 = new Color(255, 193, 32);
     private static final Color SUN_COLOR2 = new Color(239, 115, 27);
+    private static final Color HOUSE_COLOR_WALL = new Color(126, 67, 24);
+    private static final Color HOUSE_COLOR_WINDOW = new Color(138, 239, 233);
     private static Random rnd = new Random();
     private static Timer timer;
 
     private Mountain mountain;
-    private Tree tree;
+    private TreeType1 treeT1;
+    private TreeType2 treeT2;
     private Cloud cloud;
     private Bird bird;
     private Grass grass;
     private Stone stone;
     private GroundStone groundStone;
     private Sun sun;
+    private House house;
 
     public DrawPanel() {
         timer = new Timer(1000, new AbstractAction() {
@@ -84,22 +88,24 @@ public class DrawPanel extends JPanel {
             int l = rnd.nextInt(getWidth() / 4) + width / 15;
             int h = rnd.nextInt(getHeight() / 4) + height / 15;
             PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),height / 2 + height / 16,l, h);
-            mountain = new Mountain(p, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3);
+            mountain = new Mountain(p, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
             mountain.draw(g2d);
         }
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             int l = rnd.nextInt(getWidth() / 4) + width / 10;
             int h = rnd.nextInt(getHeight() / 4) + height / 8;
-            int flag = rnd.nextInt(2);
             PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),height / 2 + height / 16,l, h);
-            tree = new Tree(p, TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, TREE_LEAVES_COLOR2);
-            if(flag == 1){
-                tree.drawType1(g2d);
-            }
-            else{
-                tree.drawType2(g2d);
-            }
+            treeT1 = new TreeType1(p, TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            treeT1.draw(g2d);
+        }
+
+        for (int i = 0; i < 4; i++) {
+            int l = rnd.nextInt(getWidth() / 4) + width / 10;
+            int h = rnd.nextInt(getHeight() / 4) + height / 8;
+            PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),height / 2 + height / 16,l, h);
+            treeT2 = new TreeType2(p, TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+            treeT2.draw(g2d);
         }
 
         for (int i = 0; i < 4; i++) {
@@ -146,25 +152,25 @@ public class DrawPanel extends JPanel {
 
         /*// todo mountains samples
         PositionParameters p1 = new PositionParameters(0,height / 2 + height / 16,getWidth() / 5, getHeight() / 5);
-        mountain = new Mountain(p1, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3);
+        mountain = new Mountain(p1, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
         mountain.draw(g2d);
 
         PositionParameters p2 = new PositionParameters(500,height / 2 + height / 16,getWidth() / 3, getHeight() / 5);
-        mountain = new Mountain(p2, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3);
+        mountain = new Mountain(p2, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
         mountain.draw(g2d);
 
         PositionParameters p3 = new PositionParameters(800,height / 2 + height / 16,getWidth() / 3, getHeight() / 3);
-        mountain = new Mountain(p3, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3);
+        mountain = new Mountain(p3, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
         mountain.draw(g2d);
 
         // todo tree samples
         PositionParameters p4 = new PositionParameters(0,height / 2 + height / 16, getWidth() / 7, getHeight() / 5);
-        tree = new Tree(p4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, TREE_LEAVES_COLOR2);
-        tree.drawType1(g2d);
+        treeT1 = new TreeType1(p4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, TREE_LEAVES_COLOR2, BIRD_COLOR);
+        treeT1.draw(g2d);
 
         PositionParameters p5 = new PositionParameters(400,height / 2 + height / 16, width / 7, height / 5);
-        tree = new Tree(p5, TREE_LEAVES_COLOR1, TREE_STABLE_COLOR, TREE_LEAVES_COLOR2);
-        tree.drawType2(g2d);
+        treeT2 = new TreeType2(p5, TREE_LEAVES_COLOR1, TREE_STABLE_COLOR, BIRD_COLOR);
+        treeT2.draw(g2d);
 
         // todo cloud sample
         PositionParameters p6 = new PositionParameters(0, height / 8, width / 15, width / 15);
@@ -189,7 +195,12 @@ public class DrawPanel extends JPanel {
         //todo ground_stone
         PositionParameters p10 = new PositionParameters(500, height - height / 8,width / 30, height / 27);
         groundStone = new GroundStone(p10, BIRD_COLOR, MOUNTAIN_COLOR1);
-        groundStone.draw(g2d);*/
+        groundStone.draw(g2d);
+
+        // todo house sample
+        PositionParameters p = new PositionParameters(0,height / 2, width / 8, height / 6);
+        house = new House(p,HOUSE_COLOR_WALL,TREE_STABLE_COLOR, HOUSE_COLOR_WINDOW, BIRD_COLOR);
+        house.draw(g2d);*/
 
     }
 

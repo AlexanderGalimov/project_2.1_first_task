@@ -2,7 +2,7 @@ package ru.vsu.cs.galimov.tasks;
 
 import java.awt.*;
 
-public class GroundStone {
+public class GroundStone implements Drawable{
     private PositionParameters parameters;
     private Color color1;
     private Color color2;

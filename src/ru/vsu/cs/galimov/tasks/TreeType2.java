@@ -2,19 +2,21 @@ package ru.vsu.cs.galimov.tasks;
 
 import java.awt.*;
 
-public class Sun implements Drawable{
-    private PositionParameters parameters;
+public class TreeType2 implements Drawable{
+    PositionParameters parameters;
     private Color color1;
     private Color color2;
+    private Color color3;
 
-    public Sun(PositionParameters parameters, Color color1, Color color2) {
+    public TreeType2(PositionParameters parameters, Color color1, Color color2, Color color3) {
         this.parameters = parameters;
         this.color1 = color1;
         this.color2 = color2;
+        this.color3 = color3;
     }
 
     public void draw(Graphics2D g2d){
-        DrawUtils.drawSun(g2d, parameters, color1, color2);
+        DrawUtils.drawTreeType2(g2d, parameters, color1, color2, color3);
     }
 
     public PositionParameters getParameters() {
@@ -39,5 +41,13 @@ public class Sun implements Drawable{
 
     public void setColor2(Color color2) {
         this.color2 = color2;
+    }
+
+    public Color getColor3() {
+        return color3;
+    }
+
+    public void setColor3(Color color3) {
+        this.color3 = color3;
     }
 }

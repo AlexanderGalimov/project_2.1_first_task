@@ -2,7 +2,7 @@ package ru.vsu.cs.galimov.tasks;
 
 import java.awt.*;
 
-public class Grass {
+public class Grass implements Drawable{
     private PositionParameters parameters;
     private Color color;
 

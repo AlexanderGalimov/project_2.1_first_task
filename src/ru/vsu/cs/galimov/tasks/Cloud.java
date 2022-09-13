@@ -2,7 +2,7 @@ package ru.vsu.cs.galimov.tasks;
 
 import java.awt.*;
 
-public class Cloud {
+public class Cloud implements Drawable{
     PositionParameters param;
     private Color color;
 

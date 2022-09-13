@@ -2,7 +2,7 @@ package ru.vsu.cs.galimov.tasks;
 
 import java.awt.*;
 
-public class Stone {
+public class Stone implements Drawable{
     private PositionParameters parameters;
     private Color color;
 
