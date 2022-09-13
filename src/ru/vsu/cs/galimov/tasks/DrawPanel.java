@@ -84,7 +84,7 @@ public class DrawPanel extends JPanel {
         sun = new Sun(parameters, SUN_COLOR1, SUN_COLOR2);
         sun.draw(g2d);
 
-        for (int i = 0; i < 8; i++) {
+        /*for (int i = 0; i < 8; i++) {
             int l = rnd.nextInt(getWidth() / 4) + width / 15;
             int h = rnd.nextInt(getHeight() / 4) + height / 15;
             PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),height / 2 + height / 16,l, h);
@@ -142,7 +142,7 @@ public class DrawPanel extends JPanel {
             PositionParameters p = new PositionParameters(rnd.nextInt(getWidth() - l / 2),  height - height / 10 - rnd.nextInt(height / 15) , width / 30, height / 27);
             groundStone = new GroundStone(p, BIRD_COLOR, MOUNTAIN_COLOR1);
             groundStone.draw(g2d);
-        }
+        }*/
 
         // Drawable
         // сделать мир тип вокруг, плюс компас, который будет показывать градусы при повороте
@@ -195,12 +195,12 @@ public class DrawPanel extends JPanel {
         //todo ground_stone
         PositionParameters p10 = new PositionParameters(500, height - height / 8,width / 30, height / 27);
         groundStone = new GroundStone(p10, BIRD_COLOR, MOUNTAIN_COLOR1);
-        groundStone.draw(g2d);
+        groundStone.draw(g2d);*/
 
         // todo house sample
-        PositionParameters p = new PositionParameters(0,height / 2, width / 8, height / 6);
+        PositionParameters p = new PositionParameters(width / 3,height / 2, width / 8, height / 6);
         house = new House(p,HOUSE_COLOR_WALL,TREE_STABLE_COLOR, HOUSE_COLOR_WINDOW, BIRD_COLOR);
-        house.draw(g2d);*/
+        house.draw(g2d);
 
     }
 

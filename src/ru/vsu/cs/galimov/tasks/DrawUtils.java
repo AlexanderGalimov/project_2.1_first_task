@@ -165,6 +165,13 @@ public class DrawUtils {
 
         g2d.fillRect(parameters.getX() + parameters.getLength() / 3 + parameters.getLength() / 7, parameters.getY() + parameters.getHeight() / 3, parameters.getLength() / 18, parameters.getHeight() / 3);
 
+        g2d.setColor(color2);
+        g2d.setStroke(new BasicStroke(7));
+        g2d.drawLine(parameters.getX(), parameters.getY(), parameters.getX() + parameters.getLength() / 2, parameters.getY() - parameters.getHeight() / 2);
+        g2d.drawLine(parameters.getX() + parameters.getLength() / 2, parameters.getY() - parameters.getHeight() / 2, parameters.getX() + parameters.getLength(), parameters.getY());
+        g2d.drawLine(parameters.getX(), parameters.getY(), parameters.getX() + parameters.getLength(), parameters.getY());
+        g2d.setStroke(new BasicStroke(3));
+
     }
 
 
