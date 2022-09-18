@@ -16,6 +16,5 @@ public class MainWindow extends JFrame {
 
         mainPanel = new DrawPanel();
         this.add(mainPanel);
-
     }
 }

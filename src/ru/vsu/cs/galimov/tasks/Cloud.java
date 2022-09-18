@@ -3,24 +3,24 @@ package ru.vsu.cs.galimov.tasks;
 import java.awt.*;
 
 public class Cloud implements Drawable{
-    PositionParameters param;
+    private PositionParameters parameters;
     private Color color;
 
     public Cloud(PositionParameters param, Color color) {
-        this.param = param;
+        this.parameters = param;
         this.color = color;
     }
 
     public void draw(Graphics2D g2d){
-        DrawUtils.drawCloud(g2d, param, color);
+        DrawUtils.drawCloud(g2d, parameters, color);
     }
 
-    public PositionParameters getParam() {
-        return param;
+    public PositionParameters getParameters() {
+        return parameters;
     }
 
-    public void setParam(PositionParameters param) {
-        this.param = param;
+    public void setParameters(PositionParameters param) {
+        this.parameters = param;
     }
 
     public Color getColor() {

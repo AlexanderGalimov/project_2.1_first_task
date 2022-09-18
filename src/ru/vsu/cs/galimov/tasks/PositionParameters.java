@@ -13,6 +13,19 @@ public class PositionParameters {
         this.height = height;
     }
 
+    public void move(Directions direction, int velocity){
+        switch(direction) {
+            case LEFT:
+                x+=velocity;
+                break;
+            case RIGHT:
+                x-=velocity;
+                break;
+            default:
+                break;
+        }
+    }
+
     public int getX() {
         return x;
     }

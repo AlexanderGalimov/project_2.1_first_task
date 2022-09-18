@@ -3,7 +3,7 @@ package ru.vsu.cs.galimov.tasks;
 import java.awt.*;
 
 public class TreeType2 implements Drawable{
-    PositionParameters parameters;
+    private PositionParameters parameters;
     private Color color1;
     private Color color2;
     private Color color3;

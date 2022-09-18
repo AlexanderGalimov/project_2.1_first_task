@@ -1,6 +1,7 @@
 package ru.vsu.cs.galimov.tasks;
 
 import java.awt.*;
+import java.util.List;
 
 public class DrawUtils {
     public static void drawMountain(Graphics2D g2d, PositionParameters parameters, Color col1, Color col2, Color col3, Color col4){

@@ -17,6 +17,7 @@ public class House implements Drawable{
         this.color4 = color4;
     }
 
+
     @Override
     public void draw(Graphics2D g2d) {
         DrawUtils.drawHouse(g2d, parameters, color1, color2, color3, color4);
