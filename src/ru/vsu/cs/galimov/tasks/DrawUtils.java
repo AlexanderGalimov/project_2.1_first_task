@@ -1,7 +1,6 @@
 package ru.vsu.cs.galimov.tasks;
 
 import java.awt.*;
-import java.util.List;
 
 public class DrawUtils {
     public static void drawMountain(Graphics2D g2d, PositionParameters parameters, Color col1, Color col2, Color col3, Color col4){
@@ -33,7 +32,7 @@ public class DrawUtils {
 
     }
 
-    public static void drawTreeType1(Graphics2D g2d,PositionParameters parameters, Color color1, Color color2, Color color3, Color color4){
+    public static void drawTreeType1(Graphics2D g2d, PositionParameters parameters, Color color1, Color color2, Color color3, Color color4){
         g2d.setColor(color2);
         g2d.fillRect(parameters.getX() + parameters.getLength() / 2 - parameters.getLength() / 24, parameters.getY() - parameters.getHeight() / 4, parameters.getHeight() / 12, parameters.getHeight() / 4);
 
@@ -63,7 +62,7 @@ public class DrawUtils {
 
     }
 
-    public static void drawTreeType2(Graphics2D g2d,PositionParameters parameters, Color col1, Color col2, Color col3){
+    public static void drawTreeType2(Graphics2D g2d, PositionParameters parameters, Color col1, Color col2, Color col3){
         g2d.setColor(col2);
         g2d.fillRect(parameters.getX() + parameters.getLength() / 2 - parameters.getLength() / 24, parameters.getY() - parameters.getHeight(), parameters.getHeight() / 12, parameters.getHeight());
 
@@ -89,7 +88,6 @@ public class DrawUtils {
         g2d.fillOval(parameters.getX() + parameters.getLength() * 9 / 8, parameters.getY() + parameters.getHeight() / 6, parameters.getLength() * 2 / 3, parameters.getHeight() * 2 / 3);
     }
 
-    // откладывать справа на две длины
     public static void drawBird(Graphics2D g2d, PositionParameters parameters, Color color){
         g2d.setColor(color);
 
@@ -104,7 +102,6 @@ public class DrawUtils {
         g2d.fillPolygon(new int[] {parameters.getX() + parameters.getLength() * 8 / 9, parameters.getX() + parameters.getLength() / 2 + parameters.getLength() * 8 / 9, parameters.getX() + parameters.getLength() + parameters.getLength() * 8 / 9}, new int[] {parameters.getY(), parameters.getY() - parameters.getHeight(), parameters.getY()}, 3);
     }
 
-    // откладывать слева и справа по length / 2
     public static void drawStone(Graphics2D g2d, PositionParameters parameters, Color color){
         g2d.setColor(color);
         g2d.fillRect(parameters.getX(), parameters.getY(), parameters.getLength(), parameters.getHeight());
