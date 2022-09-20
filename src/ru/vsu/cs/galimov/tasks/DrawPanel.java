@@ -3,6 +3,8 @@ package ru.vsu.cs.galimov.tasks;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.font.TextAttribute;
+import java.text.AttributedString;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.List;
@@ -31,6 +33,7 @@ public class DrawPanel extends JPanel {
     private ScreenLengthParameters sc;
     private static double k1 = 1;
     private static double k2 = 1;
+    private static double angle = 0;
     private static boolean flag = true;
 
     private static List<Mountain> listOfMountain = new ArrayList<>();
@@ -70,34 +73,46 @@ public class DrawPanel extends JPanel {
 
             if(e.getKeyCode() == 37){
                 directions = Directions.LEFT;
+                angle -= 2;
+                if(angle < 0){
+                    angle = 360 + angle;
+                }
             }
+
             if(e.getKeyCode() == 39){
                 directions = Directions.RIGHT;
+                angle+=2;
+                if(angle == 360){
+                    angle = 0;
+                }
             }
 
             for (int i = 0; i < listOfMountain.size(); i++) {
-                listOfMountain.get(i).getParameters().move(directions,sc.getCurr() / 100);
+                listOfMountain.get(i).getParameters().move(directions,sc.getCurr() / 60);
             }
             for (int i = 0; i < listOfTreeType1.size(); i++) {
-                listOfTreeType1.get(i).getParameters().move(directions,sc.getCurr() / 100);
+                listOfTreeType1.get(i).getParameters().move(directions,sc.getCurr() / 60);
             }
             for (int i = 0; i < listOfTreeType2.size(); i++) {
-                listOfTreeType2.get(i).getParameters().move(directions,sc.getCurr() / 100);
+                listOfTreeType2.get(i).getParameters().move(directions,sc.getCurr() / 60);
             }
             for (int i = 0; i < listOfSun.size(); i++) {
-                listOfSun.get(i).getParameters().move(directions,sc.getCurr() / 100);
+                listOfSun.get(i).getParameters().move(directions,sc.getCurr() / 60);
             }
             for (int i = 0; i < listOfclouds.size(); i++) {
-                listOfclouds.get(i).getParameters().move(directions,sc.getCurr() / 100);
+                listOfclouds.get(i).getParameters().move(directions,sc.getCurr() / 60);
             }
             for (int i = 0; i < listOfBirds.size(); i++) {
-                listOfBirds.get(i).getParameters().move(directions,sc.getCurr() / 100);
+                listOfBirds.get(i).getParameters().move(directions,sc.getCurr() / 60);
             }
             for (int i = 0; i < listOfHouses.size(); i++) {
-                listOfHouses.get(i).getParameters().move(directions,sc.getCurr() / 100);
+                listOfHouses.get(i).getParameters().move(directions,sc.getCurr() / 60);
             }
             for (int i = 0; i < listOfGrass.size(); i++) {
-                listOfGrass.get(i).getParameters().move(directions,sc.getCurr() / 100);
+                listOfGrass.get(i).getParameters().move(directions,sc.getCurr() / 60);
+            }
+            for (int i = 0; i < listOfStones.size(); i++) {
+                listOfStones.get(i).getParameters().move(directions, sc.getCurr() / 60);
             }
 
             this.repaint();
@@ -106,89 +121,160 @@ public class DrawPanel extends JPanel {
     }
 
     public static void initialize(int width, int height){
-        Mountain mountain1, mountain2, mountain3, mountain4,mountain5, mountain6,mountain7,mountain8,mountain9;
-        TreeType1 t11,t12,t13;
-        TreeType2 t21,t22,t23,t24;
-        Cloud cloud1,cloud2,cloud3,cloud4,cloud5,cloud6;
+        Mountain mountain1, mountain2, mountain3, mountain4,mountain5, mountain6,mountain7,mountain8,mountain9,mountain10,mountain11,mountain12;
+        TreeType1 t11,t12,t13,t14,t15,t16,t17;
+        TreeType2 t21,t22,t23,t24,t25,t26;
+        Cloud cloud1,cloud2,cloud3,cloud4,cloud5,cloud6,cloud7,cloud8;
         Bird bird1,bird2,bird3;
         Sun sun;
         House house;
-        Grass grass1,grass2,grass3,grass4,grass5;
+        Grass grass1,grass2,grass3,grass4,grass5,grass6,grass7,grass8,grass9,grass10,grass11,grass12,grass13,grass14,grass15;
+        Stone stone1, stone2,stone3,stone4,stone5,stone6;
 
         if(flag){
-            /*mountain1 = Initialization.initMountain(-width * 2 / 3,height / 2 + height / 16, width / 5,height / 3, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain2 = Initialization.initMountain(-width / 3,height / 2 + height / 16, width / 3,height / 6,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain3 = Initialization.initMountain(width / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain4 = Initialization.initMountain(width * 2 / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain5 = Initialization.initMountain(width + width / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain6 = Initialization.initMountain(width + width * 2 / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);*/
+            mountain1 = Initialization.initMountain(-rnd.nextInt(width),height / 2 + height / 16, width / 5,height / 3, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain2 = Initialization.initMountain(-rnd.nextInt(width),height / 2 + height / 16, width / 3,height / 6,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain3 = Initialization.initMountain(-rnd.nextInt(width),height / 2 + height / 16, width / 4,height / 4,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain4 = Initialization.initMountain(rnd.nextInt(width),height / 2 + height / 16, width / 5,height / 5,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain5 = Initialization.initMountain(rnd.nextInt(width),height / 2 + height / 16, width / 6,height / 6,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain6 = Initialization.initMountain(rnd.nextInt(width),height / 2 + height / 16, width / 7,height / 7,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain7 = Initialization.initMountain(width + rnd.nextInt(width),height / 2 + height / 16, width / 5,height / 10,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain8 = Initialization.initMountain(width + rnd.nextInt(width),height / 2 + height / 16, width / 8,height / 5,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain9 = Initialization.initMountain(width + rnd.nextInt(width),height / 2 + height / 16, width / 5,height / 3,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain10 = Initialization.initMountain(-rnd.nextInt(width),height / 2 + height / 16, width / 4,height / 7,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain11 = Initialization.initMountain(rnd.nextInt(width),height / 2 + height / 16, width / 5,height / 3,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain12 = Initialization.initMountain(width + rnd.nextInt(width),height / 2 + height / 16, width / 8,height / 3,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
 
+            t11 = Initialization.initTreeType1(-rnd.nextInt(width), height / 2 + height / 16, width / 5, height / 6,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t12 = Initialization.initTreeType1(-rnd.nextInt(width), height / 2 + height / 16, width / 5, height / 6,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t13 = Initialization.initTreeType1(rnd.nextInt(width), height / 2 + height / 16, width / 7, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t14 = Initialization.initTreeType1(rnd.nextInt(width), height / 2 + height / 16, width / 8, height / 4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t15 = Initialization.initTreeType1(width + rnd.nextInt(width), height / 2 + height / 16, width / 5, height / 6,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t16 = Initialization.initTreeType1(width + rnd.nextInt(width), height / 2 + height / 16, width / 7, height / 8,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t17 = Initialization.initTreeType1(width + rnd.nextInt(width), height / 2 + height / 16, width / 9, height / 10,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
 
-            mountain1 = Initialization.initMountain(-width * 2 / 3,height / 2 + height / 16, width / 5,height / 3, MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain2 = Initialization.initMountain(-width / 3,height / 2 + height / 16, width / 3,height / 6,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain3 = Initialization.initMountain(width / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain4 = Initialization.initMountain(width * 2 / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain5 = Initialization.initMountain(width + width / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain6 = Initialization.initMountain(width + width * 2 / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain7 = Initialization.initMountain(width + width * 2 / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain8 = Initialization.initMountain(width + width * 2 / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain9 = Initialization.initMountain(width + width * 2 / 3,height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            t11 = Initialization.initTreeType1(-width / 2, height / 2 + height / 16, width / 5, height / 6,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
-            t12 = Initialization.initTreeType1(width / 2, height / 2 + height / 16, width / 5, height / 6,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
-            t13 = Initialization.initTreeType1(width + width / 2, height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
-            t21 = Initialization.initTreeType2(-width / 4, height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
-            t22 = Initialization.initTreeType2(width / 4, height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
-            t23 = Initialization.initTreeType2(width * 3 / 4, height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
-            t24 = Initialization.initTreeType2(width + width / 4, height / 2 + height / 16, width / 5, height / 4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+            t21 = Initialization.initTreeType2(-rnd.nextInt(width), height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+            t22 = Initialization.initTreeType2(-rnd.nextInt(width), height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+            t23 = Initialization.initTreeType2(rnd.nextInt(width), height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+            t24 = Initialization.initTreeType2(rnd.nextInt(width), height / 2 + height / 16, width / 5, height / 4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+            t25 = Initialization.initTreeType2(width + rnd.nextInt(width), height / 2 + height / 16, width / 5, height / 4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+            t26 = Initialization.initTreeType2(width + rnd.nextInt(width), height / 2 + height / 16, width / 5, height / 4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+
             sun = Initialization.initSun(width / 2 - width / 10, height / 6, width * 2 / 10, (int)(height * 3.5 / 10),SUN_COLOR1, SUN_COLOR2);
-            cloud1 = Initialization.initCloud(-width * 3 / 4,height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud2 = Initialization.initCloud(-width / 4,height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud3 = Initialization.initCloud(width / 4,height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud4 = Initialization.initCloud(width * 3 / 4,height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud5 = Initialization.initCloud(width + width / 4,height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud6 = Initialization.initCloud(width + width * 3 / 4,height / 8,width / 15, height / 14,CLOUD_COLOR);
+
+            cloud1 = Initialization.initCloud(-rnd.nextInt(width),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud2 = Initialization.initCloud(-rnd.nextInt(width),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud3 = Initialization.initCloud(rnd.nextInt(width),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud4 = Initialization.initCloud(rnd.nextInt(width),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud5 = Initialization.initCloud(width + rnd.nextInt(width),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud6 = Initialization.initCloud(width + rnd.nextInt(width),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud7 = Initialization.initCloud(width + rnd.nextInt(width),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud8 = Initialization.initCloud(-rnd.nextInt(width),height / 8,width / 15, height / 14,CLOUD_COLOR);
+
             bird1 = Initialization.initBird(-width * 5 / 6,  height / 10,width / 18, height / 18,BIRD_COLOR);
             bird2 = Initialization.initBird(width / 6,  height / 10,width / 18, height / 18,BIRD_COLOR);
             bird3 = Initialization.initBird(width + width * 5 / 6,  height / 10,width / 18, height / 18,BIRD_COLOR);
             house = Initialization.initHouse(width / 3,height / 2 + height / 8, width / 8, height / 6,HOUSE_COLOR_WALL,TREE_STABLE_COLOR, HOUSE_COLOR_WINDOW, BIRD_COLOR);
-            grass1 = Initialization.initGrass(-width * 3 / 4, height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
-            grass2 = Initialization.initGrass(-width / 4, height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
-            grass3 = Initialization.initGrass(width / 4, height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
-            grass4 = Initialization.initGrass(width * 3 / 4, height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
-            grass5 = Initialization.initGrass(width + width * 3 / 4, height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+
+            grass1 = Initialization.initGrass(-rnd.nextInt(width), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+            grass2 = Initialization.initGrass(-rnd.nextInt(width), height / 2 + height / 5 ,width / 25, height / 20, GRASS_COLOR);
+            grass3 = Initialization.initGrass(-rnd.nextInt(width), height / 2 + height / 6 ,width / 25, height / 20, GRASS_COLOR);
+            grass4 = Initialization.initGrass(-rnd.nextInt(width), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+            grass5 = Initialization.initGrass(-rnd.nextInt(width), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+            grass6 = Initialization.initGrass(rnd.nextInt(width), height / 2 + height / 5 ,width / 25, height / 20, GRASS_COLOR);
+            grass7 = Initialization.initGrass(rnd.nextInt(width), height / 2 + height / 6 ,width / 25, height / 20, GRASS_COLOR);
+            grass8 = Initialization.initGrass(rnd.nextInt(width), height / 2 + height / 7 ,width / 25, height / 20, GRASS_COLOR);
+            grass9 = Initialization.initGrass(rnd.nextInt(width), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+            grass10 = Initialization.initGrass(rnd.nextInt(width), height / 2 + height / 5 ,width / 25, height / 20, GRASS_COLOR);
+            grass11 = Initialization.initGrass(width + rnd.nextInt(width), height / 2 + height / 7 ,width / 25, height / 20, GRASS_COLOR);
+            grass12 = Initialization.initGrass(width + rnd.nextInt(width), height / 2 + height / 5 ,width / 25, height / 20, GRASS_COLOR);
+            grass13 = Initialization.initGrass(width + rnd.nextInt(width), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+            grass14 = Initialization.initGrass(width + rnd.nextInt(width), height / 2 + height / 7 ,width / 25, height / 20, GRASS_COLOR);
+            grass15 = Initialization.initGrass(width + rnd.nextInt(width), height / 2 + height / 6 ,width / 25, height / 20, GRASS_COLOR);
+
+            stone1 = Initialization.initStone(-rnd.nextInt(width),height / 2 + height / 5,width / 19,height / 20,STONE_COLOR);
+            stone2 = Initialization.initStone(-rnd.nextInt(width),height / 2 + height / 5,width / 19,height / 20,STONE_COLOR);
+            stone3 = Initialization.initStone(rnd.nextInt(width),height / 2 + height / 6,width / 19,height / 20,STONE_COLOR);
+
+            stone4 = Initialization.initStone(rnd.nextInt(width),height / 2 + height / 5,width / 21,height / 20,STONE_COLOR);
+            stone5 = Initialization.initStone(width + rnd.nextInt(width),height / 2 + height / 5,width / 20,height / 20,STONE_COLOR);
+            stone6 = Initialization.initStone(width + rnd.nextInt(width),height / 2 + height / 6,width / 20,height / 19,STONE_COLOR);
+
             flag = false;
         }
 
         else{
             mountain1 = Initialization.initMountain((int)(listOfMountain.get(0).getParameters().getX() * k1),height / 2 + height / 16, width / 5,height / 3,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
             mountain2 = Initialization.initMountain((int)(listOfMountain.get(1).getParameters().getX() * k1),height / 2 + height / 16, width / 3,height / 6,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain3 = Initialization.initMountain((int)(listOfMountain.get(2).getParameters().getX() * k1),height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain4 = Initialization.initMountain((int)(listOfMountain.get(3).getParameters().getX() * k1),height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
-            mountain5 = Initialization.initMountain((int)(listOfMountain.get(4).getParameters().getX() * k1),height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain3 = Initialization.initMountain((int)(listOfMountain.get(2).getParameters().getX() * k1),height / 2 + height / 16, width / 4,height / 4,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain4 = Initialization.initMountain((int)(listOfMountain.get(3).getParameters().getX() * k1),height / 2 + height / 16, width / 5,height / 5,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain5 = Initialization.initMountain((int)(listOfMountain.get(4).getParameters().getX() * k1),height / 2 + height / 16, width / 6,height / 6,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
             mountain6 = Initialization.initMountain((int)(listOfMountain.get(5).getParameters().getX() * k1),height / 2 + height / 16, width / 7,height / 8,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain7 = Initialization.initMountain((int)(listOfMountain.get(6).getParameters().getX() * k1),height / 2 + height / 16, width / 5,height / 10,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain8 = Initialization.initMountain((int)(listOfMountain.get(7).getParameters().getX() * k1),height / 2 + height / 16, width / 8,height / 5,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain9 = Initialization.initMountain((int)(listOfMountain.get(8).getParameters().getX() * k1),height / 2 + height / 16, width / 5,height / 3,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain10 = Initialization.initMountain((int)(listOfMountain.get(9).getParameters().getX() * k1),height / 2 + height / 16, width / 4,height / 7,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain11 = Initialization.initMountain((int)(listOfMountain.get(10).getParameters().getX() * k1),height / 2 + height / 16, width / 5,height / 3,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+            mountain12 = Initialization.initMountain((int)(listOfMountain.get(11).getParameters().getX() * k1),height / 2 + height / 16, width / 8,height / 3,  MOUNTAIN_COLOR1, MOUNTAIN_COLOR2, MOUNTAIN_COLOR3, BIRD_COLOR);
+
             t11 = Initialization.initTreeType1((int)(listOfTreeType1.get(0).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
             t12 = Initialization.initTreeType1((int)(listOfTreeType1.get(1).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
-            t13 = Initialization.initTreeType1((int)(listOfTreeType1.get(2).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t13 = Initialization.initTreeType1((int)(listOfTreeType1.get(2).getParameters().getX() * k1), height / 2 + height / 16, width / 7, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t14 = Initialization.initTreeType1((int)(listOfTreeType1.get(3).getParameters().getX() * k1), height / 2 + height / 16, width / 8, height / 4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t15 = Initialization.initTreeType1((int)(listOfTreeType1.get(4).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 6,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t16 = Initialization.initTreeType1((int)(listOfTreeType1.get(5).getParameters().getX() * k1), height / 2 + height / 16, width / 7, height / 8,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+            t17 = Initialization.initTreeType1((int)(listOfTreeType1.get(6).getParameters().getX() * k1), height / 2 + height / 16, width / 9, height / 10,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR,TREE_LEAVES_COLOR2, BIRD_COLOR);
+
             t21 = Initialization.initTreeType2((int)(listOfTreeType2.get(0).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
             t22 = Initialization.initTreeType2((int)(listOfTreeType2.get(1).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
             t23 = Initialization.initTreeType2((int)(listOfTreeType2.get(2).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 5,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
             t24 = Initialization.initTreeType2((int)(listOfTreeType2.get(3).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+            t25 = Initialization.initTreeType2((int)(listOfTreeType2.get(4).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+            t26 = Initialization.initTreeType2((int)(listOfTreeType2.get(5).getParameters().getX() * k1), height / 2 + height / 16, width / 5, height / 4,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
+
+
             sun = Initialization.initSun((int)(listOfSun.get(0).getParameters().getX() * k1), height / 6, width * 2 / 10, (int)(height * 3.5 / 10),SUN_COLOR1, SUN_COLOR2);
+
             cloud1 = Initialization.initCloud((int)(listOfclouds.get(0).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud2 = Initialization.initCloud((int)(listOfclouds.get(1).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud2 = Initialization.initCloud((int)(listOfclouds.get(1).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
             cloud3 = Initialization.initCloud((int)(listOfclouds.get(2).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud4 = Initialization.initCloud((int)(listOfclouds.get(3).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud5 = Initialization.initCloud((int)(listOfclouds.get(4).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud4 = Initialization.initCloud((int)(listOfclouds.get(3).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud5 = Initialization.initCloud((int)(listOfclouds.get(4).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
             cloud6 = Initialization.initCloud((int)(listOfclouds.get(5).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud7 = Initialization.initCloud((int)(listOfclouds.get(6).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud8 = Initialization.initCloud((int)(listOfclouds.get(7).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
+
+
             bird1 = Initialization.initBird((int)(listOfBirds.get(0).getParameters().getX() * k1),  height / 10,width / 18, height / 18,BIRD_COLOR);
             bird2 = Initialization.initBird((int)(listOfBirds.get(1).getParameters().getX() * k1),  height / 10,width / 18, height / 18,BIRD_COLOR);
             bird3 = Initialization.initBird((int)(listOfBirds.get(2).getParameters().getX() * k1),  height / 10,width / 18, height / 18,BIRD_COLOR);
             house = Initialization.initHouse((int)(listOfHouses.get(0).getParameters().getX() * k1),height / 2 + height / 8, width / 8, height / 6,HOUSE_COLOR_WALL,TREE_STABLE_COLOR, HOUSE_COLOR_WINDOW, BIRD_COLOR);
+
             grass1 = Initialization.initGrass((int)(listOfGrass.get(0).getParameters().getX() * k1), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
-            grass2 = Initialization.initGrass((int)(listOfGrass.get(1).getParameters().getX() * k1), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
-            grass3 = Initialization.initGrass((int)(listOfGrass.get(2).getParameters().getX() * k1), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+            grass2 = Initialization.initGrass((int)(listOfGrass.get(1).getParameters().getX() * k1), height / 2 + height / 5 ,width / 25, height / 20, GRASS_COLOR);
+            grass3 = Initialization.initGrass((int)(listOfGrass.get(2).getParameters().getX() * k1), height / 2 + height / 6 ,width / 25, height / 20, GRASS_COLOR);
             grass4 = Initialization.initGrass((int)(listOfGrass.get(3).getParameters().getX() * k1), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
             grass5 = Initialization.initGrass((int)(listOfGrass.get(4).getParameters().getX() * k1), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+
+            grass6 = Initialization.initGrass((int)(listOfGrass.get(5).getParameters().getX() * k1), height / 2 + height / 5 ,width / 25, height / 20, GRASS_COLOR);
+            grass7 = Initialization.initGrass((int)(listOfGrass.get(6).getParameters().getX() * k1), height / 2 + height / 6 ,width / 25, height / 20, GRASS_COLOR);
+            grass8 = Initialization.initGrass((int)(listOfGrass.get(7).getParameters().getX() * k1), height / 2 + height / 7 ,width / 25, height / 20, GRASS_COLOR);
+            grass9 = Initialization.initGrass((int)(listOfGrass.get(8).getParameters().getX() * k1), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+            grass10 = Initialization.initGrass((int)(listOfGrass.get(9).getParameters().getX() * k1), height / 2 + height / 5 ,width / 25, height / 20, GRASS_COLOR);
+
+            grass11 = Initialization.initGrass((int)(listOfGrass.get(10).getParameters().getX() * k1), height / 2 + height / 7 ,width / 25, height / 20, GRASS_COLOR);
+            grass12 = Initialization.initGrass((int)(listOfGrass.get(11).getParameters().getX() * k1), height / 2 + height / 5 ,width / 25, height / 20, GRASS_COLOR);
+            grass13 = Initialization.initGrass((int)(listOfGrass.get(12).getParameters().getX() * k1), height / 2 + height / 4 ,width / 25, height / 20, GRASS_COLOR);
+            grass14 = Initialization.initGrass((int)(listOfGrass.get(13).getParameters().getX() * k1), height / 2 + height / 7 ,width / 25, height / 20, GRASS_COLOR);
+            grass15 = Initialization.initGrass((int)(listOfGrass.get(14).getParameters().getX() * k1), height / 2 + height / 6 ,width / 25, height / 20, GRASS_COLOR);
+
+            stone1 = Initialization.initStone((int)(listOfStones.get(0).getParameters().getX() * k1),height / 2 + height / 5,width / 19,height / 20,STONE_COLOR);
+            stone2 = Initialization.initStone((int)(listOfStones.get(1).getParameters().getX() * k1),height / 2 + height / 5,width / 19,height / 20,STONE_COLOR);
+            stone3 = Initialization.initStone((int)(listOfStones.get(2).getParameters().getX() * k1),height / 2 + height / 6,width / 19,height / 20,STONE_COLOR);
+
+            stone4 = Initialization.initStone((int)(listOfStones.get(3).getParameters().getX() * k1),height / 2 + height / 5,width / 21,height / 20,STONE_COLOR);
+            stone5 = Initialization.initStone((int)(listOfStones.get(4).getParameters().getX() * k1),height / 2 + height / 5,width / 20,height / 20,STONE_COLOR);
+            stone6 = Initialization.initStone((int)(listOfStones.get(5).getParameters().getX() * k1),height / 2 + height / 6,width / 20,height / 19,STONE_COLOR);
 
             listOfMountain.clear();
             listOfTreeType1.clear();
@@ -198,6 +284,7 @@ public class DrawPanel extends JPanel {
             listOfBirds.clear();
             listOfHouses.clear();
             listOfGrass.clear();
+            listOfStones.clear();
         }
 
         listOfMountain.add(mountain1);
@@ -206,13 +293,25 @@ public class DrawPanel extends JPanel {
         listOfMountain.add(mountain4);
         listOfMountain.add(mountain5);
         listOfMountain.add(mountain6);
+        listOfMountain.add(mountain7);
+        listOfMountain.add(mountain8);
+        listOfMountain.add(mountain9);
+        listOfMountain.add(mountain10);
+        listOfMountain.add(mountain11);
+        listOfMountain.add(mountain12);
         listOfTreeType1.add(t11);
         listOfTreeType1.add(t12);
         listOfTreeType1.add(t13);
+        listOfTreeType1.add(t14);
+        listOfTreeType1.add(t15);
+        listOfTreeType1.add(t16);
+        listOfTreeType1.add(t17);
         listOfTreeType2.add(t21);
         listOfTreeType2.add(t22);
         listOfTreeType2.add(t23);
         listOfTreeType2.add(t24);
+        listOfTreeType2.add(t25);
+        listOfTreeType2.add(t26);
         listOfSun.add(sun);
         listOfclouds.add(cloud1);
         listOfclouds.add(cloud2);
@@ -220,6 +319,8 @@ public class DrawPanel extends JPanel {
         listOfclouds.add(cloud4);
         listOfclouds.add(cloud5);
         listOfclouds.add(cloud6);
+        listOfclouds.add(cloud7);
+        listOfclouds.add(cloud8);
         listOfBirds.add(bird1);
         listOfBirds.add(bird2);
         listOfBirds.add(bird3);
@@ -229,6 +330,22 @@ public class DrawPanel extends JPanel {
         listOfGrass.add(grass3);
         listOfGrass.add(grass4);
         listOfGrass.add(grass5);
+        listOfGrass.add(grass6);
+        listOfGrass.add(grass7);
+        listOfGrass.add(grass8);
+        listOfGrass.add(grass9);
+        listOfGrass.add(grass10);
+        listOfGrass.add(grass11);
+        listOfGrass.add(grass12);
+        listOfGrass.add(grass13);
+        listOfGrass.add(grass14);
+        listOfGrass.add(grass15);
+        listOfStones.add(stone1);
+        listOfStones.add(stone2);
+        listOfStones.add(stone3);
+        listOfStones.add(stone4);
+        listOfStones.add(stone5);
+        listOfStones.add(stone6);
     }
 
     @Override
@@ -328,15 +445,6 @@ public class DrawPanel extends JPanel {
             }
         }
 
-        for (House house : listOfHouses) {
-            house.draw(g2d);
-            if (house.getParameters().getX() < -width) {
-                house.getParameters().setX(2 * width - Math.abs(Math.abs(house.getParameters().getX()) - width));
-            }
-            if (house.getParameters().getX() > 2 * width) {
-                house.getParameters().setX(-width + Math.abs(Math.abs(house.getParameters().getX()) - 2 * width));
-            }
-        }
 
         for (Grass grass : listOfGrass) {
             grass.draw(g2d);
@@ -348,6 +456,34 @@ public class DrawPanel extends JPanel {
             }
         }
 
+        for (Stone stone : listOfStones) {
+            stone.draw(g2d);
+            if (stone.getParameters().getX() < -width) {
+                stone.getParameters().setX(2 * width - Math.abs(Math.abs(stone.getParameters().getX()) - width));
+            }
+            if (stone.getParameters().getX() > 2 * width) {
+                stone.getParameters().setX(-width + Math.abs(Math.abs(stone.getParameters().getX()) - 2 * width));
+            }
+        }
+
+        for (House house : listOfHouses) {
+            house.draw(g2d);
+            if (house.getParameters().getX() < -width) {
+                house.getParameters().setX(2 * width - Math.abs(Math.abs(house.getParameters().getX()) - width));
+            }
+            if (house.getParameters().getX() > 2 * width) {
+                house.getParameters().setX(-width + Math.abs(Math.abs(house.getParameters().getX()) - 2 * width));
+            }
+        }
+        g2d.setColor(Color.black);
+        String ang = Double.toString(angle);
+
+        AttributedString trig = new AttributedString(ang);
+        trig.addAttribute(TextAttribute.FAMILY, "Comic Sans MS"); //Change to Font.SANS_SERIF constant
+        trig.addAttribute(TextAttribute.SIZE, 20);
+
+
+        g2d.drawString(trig.getIterator(),10,20);
 
         /*PositionParameters p;
         for (int i = 0; i < 5; i++) {
