@@ -124,7 +124,7 @@ public class DrawUtils {
 
     }
 
-    public static void drawHouse(Graphics2D g2d, PositionParameters parameters, Color color1, Color color2, Color color3, Color color4){
+    public static void drawHouse(Graphics2D g2d, PositionParameters parameters, Color color1, Color color2, Color color3, Color color4, int index){
         g2d.setColor(color1);
         g2d.fillRect(parameters.getX(), parameters.getY(), parameters.getLength(), parameters.getHeight());
         g2d.fillPolygon(new int[] {parameters.getX(), parameters.getX() + parameters.getLength() / 2, parameters.getX() + parameters.getLength()}, new int[] {parameters.getY(), parameters.getY() - parameters.getHeight() / 2, parameters.getY()}, 3);
@@ -170,6 +170,60 @@ public class DrawUtils {
         g2d.drawLine(parameters.getX(), parameters.getY(), parameters.getX() + parameters.getLength(), parameters.getY());
         g2d.setStroke(new BasicStroke(3));
 
+        if(index == 1){
+            g2d.setStroke(new BasicStroke(4));
+            g2d.setColor(color1);
+            g2d.drawLine(parameters.getX() + parameters.getLength() * 2 / 3, parameters.getY() + parameters.getHeight(), parameters.getX() + parameters.getLength(), parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5);
+            g2d.setColor(color4);
+            g2d.drawLine(parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength() + parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength() - parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 6);
+
+            g2d.setColor(color2);
+            g2d.drawLine(parameters.getX() + parameters.getLength() / 3, parameters.getY() + parameters.getHeight(), parameters.getX(), parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5);
+            g2d.setColor(color4);
+            g2d.drawLine(parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() - parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 6);
+        }
+
+        if(index == 0){
+            g2d.setStroke(new BasicStroke(4));
+            g2d.setColor(color1);
+            g2d.drawLine(parameters.getX() + parameters.getLength() * 2 / 3, parameters.getY() + parameters.getHeight(), parameters.getX() + parameters.getLength(), parameters.getY() + parameters.getHeight() + parameters.getHeight() / 5);
+            g2d.drawLine(parameters.getX() + parameters.getLength(), parameters.getY() + parameters.getHeight() + parameters.getHeight() / 5, parameters.getX() + parameters.getLength(), parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5);
+            g2d.setColor(color4);
+            g2d.drawLine(parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength() + parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength() - parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 6);
+
+            g2d.setColor(color2);
+            g2d.drawLine(parameters.getX() + parameters.getLength() / 3, parameters.getY() + parameters.getHeight(), parameters.getX(), parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5);
+            g2d.setColor(color4);
+            g2d.drawLine(parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() - parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 6);
+        }
+
+        if(index == 2){
+            g2d.setStroke(new BasicStroke(4));
+            g2d.setColor(color2);
+            g2d.drawLine(parameters.getX() + parameters.getLength() * 2 / 3, parameters.getY() + parameters.getHeight(), parameters.getX() + parameters.getLength(), parameters.getY() + parameters.getHeight() + parameters.getHeight() / 5);
+            g2d.drawLine(parameters.getX() + parameters.getLength(), parameters.getY() + parameters.getHeight() + parameters.getHeight() / 5, parameters.getX() + parameters.getLength(), parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5);
+            g2d.setColor(color4);
+            g2d.drawLine(parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength() + parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength() - parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 6);
+
+            g2d.setColor(color1);
+            g2d.drawLine(parameters.getX() + parameters.getLength() / 3, parameters.getY() + parameters.getHeight(), parameters.getX(), parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5);
+            g2d.setColor(color4);
+            g2d.drawLine(parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() + parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX() - parameters.getLength() / 7,parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 7);
+            g2d.drawLine(parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5,parameters.getX(),parameters.getY() + parameters.getHeight() + parameters.getHeight() * 2 / 5 + parameters.getHeight() / 6);
+        }
+
+        g2d.setStroke(new BasicStroke(3));
     }
 
 

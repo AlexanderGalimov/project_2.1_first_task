@@ -60,10 +60,10 @@ public class Initialization {
         return groundStone;
     }
 
-    public static House initHouse(int x, int y, int length, int height, Color color1, Color color2, Color color3, Color color4){
+    public static House initHouse(int x, int y, int length, int height, Color color1, Color color2, Color color3, Color color4,int typePosition){
         House house;
         PositionParameters p = new PositionParameters(x,y, length,height);
-        house = new House(p,  color1, color2, color3, color4);
+        house = new House(p,  color1, color2, color3, color4, typePosition);
         return house;
     }
     public static Sun initSun(int x, int y, int length, int height, Color color1, Color color2){

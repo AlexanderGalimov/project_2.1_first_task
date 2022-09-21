@@ -15,6 +15,7 @@ public class MainWindow extends JFrame {
         setSize(width, height);
 
         mainPanel = new DrawPanel();
+        mainPanel.setFocusable(true);
         this.add(mainPanel);
     }
 }
