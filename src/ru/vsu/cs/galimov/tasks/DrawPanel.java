@@ -39,7 +39,7 @@ public class DrawPanel extends JPanel {
     private static final List<Mountain> listOfMountain = new ArrayList<>();
     private static final List<TreeType1> listOfTreeType1 = new ArrayList<>();
     private static final List<TreeType2> listOfTreeType2 = new ArrayList<>();
-    private static final List<Cloud> listOfclouds = new ArrayList<>();
+    private static final List<Cloud> listOfСlouds = new ArrayList<>();
     private static final List<Bird> listOfBirds = new ArrayList<>();
     private static final List<Grass> listOfGrass = new ArrayList<>();
     private static final List<Stone> listOfStones = new ArrayList<>();
@@ -84,8 +84,8 @@ public class DrawPanel extends JPanel {
                 for (int i = 0; i < listOfTreeType2.size(); i++) {
                     listOfTreeType2.get(i).getParameters().move(directions, sc.getCurr() / 20);
                 }
-                for (int i = 0; i < listOfclouds.size(); i++) {
-                    listOfclouds.get(i).getParameters().move(directions, sc.getCurr() / 20);
+                for (int i = 0; i < listOfСlouds.size(); i++) {
+                    listOfСlouds.get(i).getParameters().move(directions, sc.getCurr() / 20);
                 }
                 for (int i = 0; i < listOfBirds.size(); i++) {
                     listOfBirds.get(i).getParameters().move(directions, sc.getCurr() / 20);
@@ -231,14 +231,14 @@ public class DrawPanel extends JPanel {
             t25 = Initialization.initTreeType2((int)(listOfTreeType2.get(4).getParameters().getX() * k1), height / 2 + height / 16, width / 8, height / 8,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
             t26 = Initialization.initTreeType2((int)(listOfTreeType2.get(5).getParameters().getX() * k1), height / 2 + height / 16, width / 8, height / 8,TREE_LEAVES_COLOR1,TREE_STABLE_COLOR, BIRD_COLOR);
 
-            cloud1 = Initialization.initCloud((int)(listOfclouds.get(0).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud2 = Initialization.initCloud((int)(listOfclouds.get(1).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
-            cloud3 = Initialization.initCloud((int)(listOfclouds.get(2).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud4 = Initialization.initCloud((int)(listOfclouds.get(3).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
-            cloud5 = Initialization.initCloud((int)(listOfclouds.get(4).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
-            cloud6 = Initialization.initCloud((int)(listOfclouds.get(5).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
-            cloud7 = Initialization.initCloud((int)(listOfclouds.get(6).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
-            cloud8 = Initialization.initCloud((int)(listOfclouds.get(7).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud1 = Initialization.initCloud((int)(listOfСlouds.get(0).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud2 = Initialization.initCloud((int)(listOfСlouds.get(1).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud3 = Initialization.initCloud((int)(listOfСlouds.get(2).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud4 = Initialization.initCloud((int)(listOfСlouds.get(3).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud5 = Initialization.initCloud((int)(listOfСlouds.get(4).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud6 = Initialization.initCloud((int)(listOfСlouds.get(5).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
+            cloud7 = Initialization.initCloud((int)(listOfСlouds.get(6).getParameters().getX() * k1),height / 9,width / 15, height / 14,CLOUD_COLOR);
+            cloud8 = Initialization.initCloud((int)(listOfСlouds.get(7).getParameters().getX() * k1),height / 8,width / 15, height / 14,CLOUD_COLOR);
 
             bird1 = Initialization.initBird((int)(listOfBirds.get(0).getParameters().getX() * k1),  height / 10,width / 18, height / 18,BIRD_COLOR);
             bird2 = Initialization.initBird((int)(listOfBirds.get(1).getParameters().getX() * k1),  height / 10,width / 18, height / 18,BIRD_COLOR);
@@ -276,7 +276,7 @@ public class DrawPanel extends JPanel {
             listOfSun.clear();
             listOfTreeType1.clear();
             listOfTreeType2.clear();
-            listOfclouds.clear();
+            listOfСlouds.clear();
             listOfBirds.clear();
             listOfHouses.clear();
             listOfGrass.clear();
@@ -315,14 +315,14 @@ public class DrawPanel extends JPanel {
         listOfTreeType2.add(t24);
         listOfTreeType2.add(t25);
         listOfTreeType2.add(t26);
-        listOfclouds.add(cloud1);
-        listOfclouds.add(cloud2);
-        listOfclouds.add(cloud3);
-        listOfclouds.add(cloud4);
-        listOfclouds.add(cloud5);
-        listOfclouds.add(cloud6);
-        listOfclouds.add(cloud7);
-        listOfclouds.add(cloud8);
+        listOfСlouds.add(cloud1);
+        listOfСlouds.add(cloud2);
+        listOfСlouds.add(cloud3);
+        listOfСlouds.add(cloud4);
+        listOfСlouds.add(cloud5);
+        listOfСlouds.add(cloud6);
+        listOfСlouds.add(cloud7);
+        listOfСlouds.add(cloud8);
         listOfBirds.add(bird1);
         listOfBirds.add(bird2);
         listOfBirds.add(bird3);
@@ -442,7 +442,7 @@ public class DrawPanel extends JPanel {
         }
 
 
-        for (Cloud cloud : listOfclouds) {
+        for (Cloud cloud : listOfСlouds) {
             cloud.draw(g2d);
             if (cloud.getParameters().getX() < -width) {
                 cloud.getParameters().setX(2 * width - Math.abs(Math.abs(cloud.getParameters().getX()) - width));
@@ -499,7 +499,6 @@ public class DrawPanel extends JPanel {
         AttributedString trig = new AttributedString(ang);
         trig.addAttribute(TextAttribute.FAMILY, "Comic Sans MS"); //Change to Font.SANS_SERIF constant
         trig.addAttribute(TextAttribute.SIZE, 20);
-
 
         g2d.drawString(trig.getIterator(), 10, 20);
 
